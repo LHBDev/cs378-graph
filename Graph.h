@@ -14,7 +14,7 @@
 #include <cassert> // assert
 #include <cstddef> // size_t
 #include <utility> // make_pair, pair
-#include <vector>  // vector
+#include <deque>  // deque
 
 // -----
 // Graph
@@ -26,12 +26,12 @@ class Graph {
         // typedefs
         // --------
 
-        typedef int vertex_descriptor;  // fix!
-        typedef int edge_descriptor;    // fix!
+        typedef int vertex_descriptor;
+        typedef std::pair<vertex_descriptor, vertex_descriptor> edge_descriptor;
 
-        typedef int* vertex_iterator;    // fix!
-        typedef int* edge_iterator;      // fix!
-        typedef int* adjacency_iterator; // fix!
+        typedef std::deque<vertex_descriptor>::const_iterator vertex_iterator;
+        typedef std::deque<edge_descriptor>::const_iterator edge_iterator;
+        typedef std::set<vertex_descriptor>::iterator adjacency_iterator;
 
         typedef std::size_t vertices_size_type;
         typedef std::size_t edges_size_type;
@@ -182,7 +182,7 @@ class Graph {
         // data
         // ----
 
-        std::vector< std::vector<vertex_descriptor> > g; // something like this
+        std::deque< std::deque<vertex_descriptor> > g; // something like this
 
         // -----
         // valid
