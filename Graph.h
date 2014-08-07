@@ -147,12 +147,13 @@ class Graph {
         // num_vertices
         // ------------
 
-        /**
-         * <your documentation>
+         /**
+         * @param g - a constant reference to a Graph
+         * @return vertices_size_type - number of vertices in g
+         * returns the number of vertices in a Graph
          */
-        friend vertices_size_type num_vertices (const Graph&) {
-            // <your code>
-            vertices_size_type s = 1; // fix
+        friend vertices_size_type num_vertices (const Graph& g) {
+            vertices_size_type s = (vertices_size_type) g._vertices.size();
             return s;}
 
         // ------
@@ -160,11 +161,14 @@ class Graph {
         // ------
 
         /**
-         * <your documentation>
+         * @param e - edge descriptor
+         * @param g - constant reference to a Graph
+         * @return vertex_descriptor
+         * returns vertex that is the source of the edge e in g
          */
-        friend vertex_descriptor source (edge_descriptor, const Graph&) {
-            // <your code>
-            vertex_descriptor v = 0; // fix
+        friend vertex_descriptor source (edge_descriptor e, const Graph& g) {
+            vertex_descriptor v = e.first;
+            // assert(g._adjacents[v].find(e.second) != g._adjacents[v].end());
             return v;}
 
         // ------
@@ -172,11 +176,14 @@ class Graph {
         // ------
 
         /**
-         * <your documentation>
+         * @param e - edge descriptor
+         * @param g - constant reference to a graph
+         * @return vertex_descriptor
+         * returns vertex that is the target in edge e in graph g
          */
-        friend vertex_descriptor target (edge_descriptor, const Graph&) {
-            // <your code>
-            vertex_descriptor v = 0; // fix
+        friend vertex_descriptor target (edge_descriptor e, const Graph& g) {
+            vertex_descriptor v = e.second;
+            // assert(g._adjacents[v].find(e.second) != g._adjacents[v].end());
             return v;}
 
         // ------
@@ -196,21 +203,23 @@ class Graph {
         // --------
 
         /**
-         * <your documentation>
+         * @param i - index of vertex i in g
+         * @param g - constant reference to a Graph
+         * @return vertex_descriptor
+         * returns vertex descriptor of vertex at index i in g
          */
-        friend std::pair<vertex_iterator, vertex_iterator> vertices (const Graph&) {
-            // <your code>
-            static int a [] = {0, 0};     // dummy data
-            vertex_iterator b = a;
-            vertex_iterator e = a + 2;
-            return std::make_pair(b, e);}
+        friend vertex_descriptor vertex (vertices_size_type i, const Graph& g) {
+            vertex_descriptor vd = g._vertices[i];
+            return vd;}
 
     private:
         // ----
         // data
         // ----
 
-        std::deque< std::deque<vertex_descriptor> > g; // something like this
+        std::vector< std::set<vertex_descriptor> > _adjacents; // set to not allow duplicates
+        std::vector<vertex_descriptor> _vertices;
+        std::vector<edge_descriptor> _edges;
 
         // -----
         // valid
@@ -220,7 +229,7 @@ class Graph {
          * <your documentation>
          */
         bool valid () const {
-            // <your code>
+            assert(_vertices.size() == _adjacents.size())
             return true;}
 
     public:
@@ -232,7 +241,9 @@ class Graph {
          * <your documentation>
          */
         Graph () {
-            // <your code>
+            _adjacents = std::vector<std::set<vertex_descriptor> >();
+            _vertices = std::vector<vertex_descriptor>();
+            _edges = std::vector<edge_descriptor>();
             assert(valid());}
 
         // Default copy, destructor, and copy assignment
