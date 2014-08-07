@@ -229,7 +229,7 @@ class Graph {
          * <your documentation>
          */
         bool valid () const {
-            assert(_vertices.size() == _adjacents.size())
+            assert(_vertices.size() == _adjacents.size());
             return true;}
 
     public:
@@ -238,13 +238,17 @@ class Graph {
         // ------------
 
         /**
-         * <your documentation>
+         * Default Constructor for Graph
          */
-        Graph () {
-            _adjacents = std::vector<std::set<vertex_descriptor> >();
-            _vertices = std::vector<vertex_descriptor>();
-            _edges = std::vector<edge_descriptor>();
+        Graph (std::vector<std::set<vertex_descriptor> > adj = std::vector<std::set<vertex_descriptor> >(),
+                std::vector<vertex_descriptor> vert = std::vector<vertex_descriptor>(),
+                std::vector<edge_descriptor> ed = std::vector<edge_descriptor>()):
+            _adjacents(adj),
+            _vertices(vert),
+            _edges(ed){
+            // <your code>
             assert(valid());}
+
 
         // Default copy, destructor, and copy assignment
         // Graph  (const Graph<T>&);
