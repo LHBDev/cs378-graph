@@ -14,7 +14,7 @@
 #include <cassert> // assert
 #include <cstddef> // size_t
 #include <utility> // make_pair, pair
-#include <deque>  // deque
+#include <vector>  // vector
 
 // -----
 // Graph
@@ -29,8 +29,8 @@ class Graph {
         typedef int vertex_descriptor;
         typedef std::pair<vertex_descriptor, vertex_descriptor> edge_descriptor;
 
-        typedef std::deque<vertex_descriptor>::iterator vertex_iterator;
-        typedef std::deque<edge_descriptor>::iterator edge_iterator;
+        typedef std::vector<vertex_descriptor>::iterator vertex_iterator;
+        typedef std::vector<edge_descriptor>::iterator edge_iterator;
         typedef std::set<vertex_descriptor>::iterator adjacency_iterator;
 
         typedef std::size_t vertices_size_type;
@@ -191,18 +191,6 @@ class Graph {
         // ------
 
         /**
-         * <your documentation>
-         */
-        friend vertex_descriptor vertex (vertices_size_type, const Graph&) {
-            // <your code>
-            vertex_descriptor vd = 0; // fix
-            return vd;}
-
-        // --------
-        // vertices
-        // --------
-
-        /**
          * @param i - index of vertex i in g
          * @param g - constant reference to a Graph
          * @return vertex_descriptor
@@ -211,7 +199,19 @@ class Graph {
         friend vertex_descriptor vertex (vertices_size_type i, const Graph& g) {
             vertex_descriptor vd = g._vertices[i];
             return vd;}
+        // --------
+        // vertices
+        // --------
 
+        /**
+         * @param g - constant reference to a Graph
+         * @return pair of vertex iterators
+         * returns beginning and end vertex_iterator for vertices in g
+         */
+        friend std::pair<vertex_iterator, vertex_iterator> vertices (const Graph& g) {
+            vertex_iterator b = g._vertices.begin();
+            vertex_iterator e = g._vertices.end();
+            return std::make_pair(b, e);}
     private:
         // ----
         // data
