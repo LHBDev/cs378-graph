@@ -518,6 +518,316 @@ TYPED_TEST(TestGraph, num_edges3){
     ASSERT_EQ(200, num_edges(g));
 }
 
+TYPED_TEST(TestGraph, num_vertices){
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    graph_type g;
+
+    ASSERT_EQ(0, num_vertices(g));
+}
+
+TYPED_TEST(TestGraph, num_vertices2){
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    graph_type g;
+
+    vertex_descriptor u = add_vertex(g);
+    vertex_descriptor v = 99;
+    add_edge(u,v,g);
+
+    ASSERT_EQ(100, num_vertices(g));
+}
+
+TYPED_TEST(TestGraph, num_vertices3){
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    graph_type g;
+    vertex_descriptor u = add_vertex(g);
+    vertex_descriptor v = 999;
+    add_edge(u,v,g);
+
+    ASSERT_EQ(1000, num_vertices(g));
+}
+
+TYPED_TEST(TestGraph, source){
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    graph_type g;
+
+    vertex_descriptor u = add_vertex(g);
+    vertex_descriptor v = add_vertex(g);
+    edge_descriptor ed  = add_edge(u,v,g).first;
+
+    ASSERT_EQ(source(ed,g), u);
+}
+
+TYPED_TEST(TestGraph, source2){
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    graph_type g;
+
+    vertex_descriptor u = add_vertex(g);
+    for(int i = 0; i < 100; ++i)
+        add_edge(u, i, g);
+    std::pair<edge_iterator, edge_iterator> p = edges(g);
+    edge_iterator b = p.first;
+    edge_iterator e = p.second;
+
+    while(b != e)
+    {
+        edge_descriptor ed = *b;
+        ++b;
+        ASSERT_EQ(source(ed,g), u);
+    }
+
+    ASSERT_EQ(b, e);
+}
+
+TYPED_TEST(TestGraph, source3){
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    graph_type g;
+
+    vertex_descriptor u = add_vertex(g);
+    vertex_descriptor v = add_vertex(g);
+    edge_descriptor ed  = add_edge(u,v,g).first;
+    edge_descriptor ed2 = add_edge(v,u,g).first;
+
+    ASSERT_EQ(source(ed,g), u);
+    ASSERT_EQ(source(ed2,g), v);
+}
+
+
+
+
+TYPED_TEST(TestGraph, target){
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    graph_type g;
+
+    vertex_descriptor u = add_vertex(g);
+    vertex_descriptor v = add_vertex(g);
+    edge_descriptor ed  = add_edge(u,v,g).first;
+
+    ASSERT_EQ(target(ed,g), v);
+}
+
+TYPED_TEST(TestGraph, target2){
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    graph_type g;
+
+    vertex_descriptor u = add_vertex(g);
+    for(int i = 0; i < 100; ++i)
+        add_edge(u, i, g);
+    std::pair<edge_iterator, edge_iterator> p = edges(g);
+    edge_iterator b = p.first;
+    edge_iterator e = p.second;
+
+    for(int i = 0; i < 100; ++i)
+    {
+        edge_descriptor ed = *b;
+        ++b;
+        ASSERT_EQ(target(ed,g), i);
+    }
+
+    ASSERT_EQ(b, e);
+}
+
+TYPED_TEST(TestGraph, target3){
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    graph_type g;
+
+    vertex_descriptor u = add_vertex(g);
+    vertex_descriptor v = add_vertex(g);
+    edge_descriptor ed  = add_edge(u,v,g).first;
+    edge_descriptor ed2 = add_edge(v,u,g).first;
+
+    ASSERT_EQ(target(ed,g), v);
+    ASSERT_EQ(target(ed2,g), u);
+}
+
+TYPED_TEST(TestGraph, vertex){
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    graph_type g;
+
+    vertex_descriptor u = add_vertex(g);
+    vertex_descriptor v = vertex(0, g);
+    ASSERT_EQ(u,v);
+}
+
+TYPED_TEST(TestGraph, vertex2){
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    graph_type g;
+
+    vertex_descriptor u = add_vertex(g);
+    add_edge(u, 99, g);
+    vertex_descriptor v = vertex(99, g);
+    ASSERT_EQ(99, v);
+}
+
+TYPED_TEST(TestGraph, vertex3){
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    graph_type g;
+
+    vertex_descriptor u = add_vertex(g);
+    vertex_descriptor w = add_vertex(g);
+    vertex_descriptor v = vertex(1, g);
+    ASSERT_EQ(w,v);
+}
+
+TYPED_TEST(TestGraph, vertices){
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    graph_type g;
+
+    std::pair<vertex_iterator, vertex_iterator> p = vertices(g);
+    vertex_iterator b = p.first;
+    vertex_iterator e = p.second;
+
+    ASSERT_EQ(b,e);
+}
+
+TYPED_TEST(TestGraph, vertices2){
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    graph_type g;
+
+    vertex_descriptor u = add_vertex(g);
+    std::pair<vertex_iterator, vertex_iterator> p = vertices(g);
+    vertex_iterator b = p.first;
+    vertex_iterator e = p.second;
+    ASSERT_EQ(u, *b);
+    ++b;
+
+    ASSERT_EQ(b,e);
+}
+
+TYPED_TEST(TestGraph, vertices3){
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    graph_type g;
+    vertex_descriptor v = add_vertex(g);
+    add_edge(v, 100, g);
+    std::pair<vertex_iterator, vertex_iterator> p = vertices(g);
+    vertex_iterator b = p.first;
+    vertex_iterator e = p.second;
+    ASSERT_EQ(*b, v);
+    ++b;
+    --e;
+
+    ASSERT_EQ(100,*e);
+}
+
 TYPED_TEST(TestGraph, Vertex) {
     typedef typename TestFixture::graph_type         graph_type;
     typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
