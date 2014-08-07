@@ -1,0 +1,83 @@
+commit c2a037fd48ce3d8d2fc89d7997f4db671fa82daf
+Author: LHBDev <freeraprb@gmail.com>
+Date:   Thu Aug 7 17:35:38 2014 -0500
+
+    added
+
+commit 9688ba0b37dc31fff1c58d8149edba3e54246839
+Author: LHBDev <freeraprb@gmail.com>
+Date:   Thu Aug 7 17:34:51 2014 -0500
+
+    Added Doxygen documentation. Fixed #9. Fixed #22.
+
+commit 751b4ee337663f315ed2815e1ead39c2ea05ee05
+Author: LHBDev <freeraprb@gmail.com>
+Date:   Thu Aug 7 17:29:40 2014 -0500
+
+    Added Optimization to constructor, fixed initialization of inner containers, code commented and clean. Fixed #24. Fixed #19. Fixed #16.
+
+commit 854218737d3904708fb42156030569988c5c03ee
+Author: LHBDev <freeraprb@gmail.com>
+Date:   Thu Aug 7 17:25:12 2014 -0500
+
+    Fixed const iterator error. Fixed #23. Fixed #13.
+
+commit 0a5a3bebbde5b0e68e7158ed022b9e0e327ea913
+Author: LHBDev <freeraprb@gmail.com>
+Date:   Thu Aug 7 17:23:53 2014 -0500
+
+    Fixed vertex and vertices
+
+commit 85555735ed1f56152361ada4a44ea854aad0e55a
+Author: LHBDev <freeraprb@gmail.com>
+Date:   Thu Aug 7 17:18:09 2014 -0500
+
+    Finish simple solution. Fixed #7. Fixed #21.
+
+commit 341748c5ba88b2a9390bd327458d27aa645ec876
+Author: LHBDev <freeraprb@gmail.com>
+Date:   Thu Aug 7 17:01:04 2014 -0500
+
+    added code for edge, edges, num_edges
+
+commit 5e92ee47cf69ad699fc4b34986302a8948dc8a4c
+Author: LHBDev <freeraprb@gmail.com>
+Date:   Thu Aug 7 16:59:08 2014 -0500
+
+     implemented add_edge, add_vertex, adjacent_vertices. Fixed #17.
+
+commit 255d74edfbd1b39542c104925b9d0a182f0380f9
+Author: LHBDev <freeraprb@gmail.com>
+Date:   Thu Aug 7 16:56:23 2014 -0500
+
+     Fixed typedefs. Fixed #14. Fixed #15. Fixed #18.
+
+commit cd19d2c1b7dc1f3dbe8e91e62c316d2eb1d319f4
+Author: LHBDev <freeraprb@gmail.com>
+Date:   Thu Aug 7 16:52:07 2014 -0500
+
+    Finished adding Unit Tests for all functions. Fixed #6. Fixed #8. Fixed #20.
+
+commit e4fc7d2ab254d9be392eb41bab775886981f3365
+Author: LHBDev <freeraprb@gmail.com>
+Date:   Thu Aug 7 16:29:41 2014 -0500
+
+    added tests for num_edges
+
+commit 1f157b5d3b692ab8676519f5d2e22c1ea893a467
+Author: LHBDev <freeraprb@gmail.com>
+Date:   Thu Aug 7 16:12:31 2014 -0500
+
+    Added tests for add_edge - edge. Fixed #2. Fixed #3. Fixed #4. Fixed #5
+
+commit 6602a3c9677a1b5d2c8851421545ab655502ae82
+Author: LHBDev <freeraprb@gmail.com>
+Date:   Thu Aug 7 16:10:48 2014 -0500
+
+    Added tests for add_edge - edge
+
+commit 1a20781202a35b86c4fafa64d13a1f462fe6756f
+Author: LHBDev <freeraprb@gmail.com>
+Date:   Wed Aug 6 21:44:09 2014 -0500
+
+    Initial Commit
