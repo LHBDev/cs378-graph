@@ -29,8 +29,8 @@ class Graph {
         typedef int vertex_descriptor;
         typedef std::pair<vertex_descriptor, vertex_descriptor> edge_descriptor;
 
-        typedef std::deque<vertex_descriptor>::const_iterator vertex_iterator;
-        typedef std::deque<edge_descriptor>::const_iterator edge_iterator;
+        typedef std::deque<vertex_descriptor>::iterator vertex_iterator;
+        typedef std::deque<edge_descriptor>::iterator edge_iterator;
         typedef std::set<vertex_descriptor>::iterator adjacency_iterator;
 
         typedef std::size_t vertices_size_type;
@@ -41,39 +41,64 @@ class Graph {
         // add_edge
         // --------
 
-        /**
-         * <your documentation>
+       /**
+         * @param u - vertex_descriptor
+         * @param v - vertex_descriptor
+         * @param g - reference to a graph
+         * @return pair of edge_descriptor and boolean indicating whether creation of edge was successful
+         * attempts to add an edge between vertex u and vertex v to Graph g
          */
-        friend std::pair<edge_descriptor, bool> add_edge (vertex_descriptor, vertex_descriptor, Graph&) {
-            // <your code>
-            edge_descriptor ed = 0;
-            bool            b  = false;
-            return std::make_pair(ed, b);}
+        friend std::pair<edge_descriptor, bool> add_edge (vertex_descriptor u, vertex_descriptor v, Graph& g) {
+            int graph_size = (int)g._vertices.size();
+
+            edge_descriptor ed = std::make_pair(u,v);
+            if(graph_size > u){
+                if(graph_size > v){
+                    std::pair<adjacency_iterator, bool> uv = g._adjacents[u].insert(v);
+                    if(uv.second){
+                        g._edges.push_back(ed);
+                    }
+                    else
+                        return std::make_pair(ed, false);
+                }else{
+                    for(vertex_descriptor i = graph_size; i <= v; ++i){
+                        g._vertices.push_back(i);
+                        g._adjacents.push_back(std::set<vertex_descriptor>());
+                    }
+                    return add_edge(u, v, g);
+                }
+            }
+
+            return std::make_pair(ed, true);}
 
         // ----------
         // add_vertex
         // ----------
 
         /**
-         * <your documentation>
+         * @param g reference to a Graph
+         * @return vertex_descriptor
+         * adds a vertex, v, to g and returns v
          */
-        friend vertex_descriptor add_vertex (Graph&) {
-            // <your code>
-            vertex_descriptor v = 0; // fix
+        friend vertex_descriptor add_vertex (Graph& g) {
+            vertex_descriptor v = g._vertices.size();
+            g._vertices.push_back(v);
+            g._adjacents.push_back(std::set<vertex_descriptor>());
             return v;}
+
 
         // -----------------
         // adjacent_vertices
         // -----------------
 
         /**
-         * <your documentation>
+         * @param u - vertex descriptor
+         * @param g - constant reference to a Graph
+         * returns pair of adjacency iterators from beginning to end of all vertices adjacent to u
          */
-        friend std::pair<adjacency_iterator, adjacency_iterator> adjacent_vertices (vertex_descriptor, const Graph&) {
-            // <your code>
-            static int a [] = {0, 0};     // dummy data
-            adjacency_iterator b = a;
-            adjacency_iterator e = a + 2;
+        friend std::pair<adjacency_iterator, adjacency_iterator> adjacent_vertices (vertex_descriptor u, const Graph& g) {
+            adjacency_iterator b = g._adjacents[u].begin();
+            adjacency_iterator e = g._adjacents[u].end();
             return std::make_pair(b, e);}
 
         // ----
